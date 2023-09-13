@@ -1,0 +1,39 @@
+version: "3"
+services:
+  moodle:
+    image: docker.io/bitnami/moodle:4.2.2
+    environment:
+      MOODLE_DATABASE_TYPE: pgsql
+      MOODLE_DATABASE_HOST: db
+      MOODLE_DATABASE_PORT_NUMBER: "5432"
+      MOODLE_DATABASE_USER: postgres
+      MOODLE_DATABASE_NAME: postgres
+      MOODLE_DATABASE_PASSWORD: pgpassword
+      MOODLE_SMTP_HOST: mail
+      MOODLE_SMTP_PORT: "1025"
+      MOODLE_SMTP_USER: moodle
+      MOODLE_SMTP_PASSWORD: moodle
+    volumes:
+      - ./moodlefs:/bitnami
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: pgpassword
+    volumes:
+      - moodledb:/var/lib/postgresql/data
+  mail:
+    image: axllent/mailpit:v1.8.4
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: "yes"
+      MP_SMTP_AUTH_ALLOW_INSECURE: "yes"
+    ports:
+      - "8025:8025"
+volumes:
+  moodledb:
+    driver: local
