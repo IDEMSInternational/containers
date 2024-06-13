@@ -1,9 +1,7 @@
 services:
   moodle:
-    build:
-      context: '.'
-      dockerfile: Dockerfile
-    image: istride/moodle:4.3.3
+    build: .
+    image: idems/moodle:latest
     environment:
       MAXIMA_URL: http://maxima:8080/maxima
       MOODLE_DATABASE_TYPE: pgsql
@@ -31,7 +29,7 @@ services:
     volumes:
       - idems_moodledb:/var/lib/postgresql/data
   maxima:
-    image: mathinstitut/goemaxima:2024012900-latest
+    image: mathinstitut/goemaxima:2024060300-latest
     restart: always
   rproxy:
     image: traefik:v2.10
