@@ -1,0 +1,56 @@
+services:
+  moodle:
+    build:
+      context: '.'
+      dockerfile: Dockerfile
+    image: istride/moodle:4.3.3
+    environment:
+      MAXIMA_URL: http://maxima:8080/maxima
+      MOODLE_DATABASE_TYPE: pgsql
+      MOODLE_DATABASE_HOST: db
+      MOODLE_DATABASE_PORT_NUMBER: '5432'
+      MOODLE_DATABASE_USER: postgres
+      MOODLE_DATABASE_NAME: postgres
+      MOODLE_DATABASE_PASSWORD: pgpassword
+      MOODLE_SMTP_HOST: mail
+      MOODLE_SMTP_PORT: '1025'
+      MOODLE_SMTP_USER: moodle
+      MOODLE_SMTP_PASSWORD: moodle
+    volumes:
+      - idems_moodlefs:/bitnami
+    depends_on:
+      - db
+    labels:
+      - 'traefik.http.routers.moodle.rule=Host(`moodle.localhost`)'
+    user: '1001'
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: pgpassword
+    volumes:
+      - idems_moodledb:/var/lib/postgresql/data
+  maxima:
+    image: mathinstitut/goemaxima:2024012900-latest
+    restart: always
+  rproxy:
+    image: traefik:v2.10
+    command: --api.insecure=true --providers.docker
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  mail:
+    image: axllent/mailpit:v1.6.21
+    restart: unless-stopped
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 'yes'
+      MP_SMTP_AUTH_ALLOW_INSECURE: 'yes'
+    ports:
+      - '8025:8025'
+volumes:
+  idems_moodledb:
+    driver: local
+  idems_moodlefs:
+    driver: local
