@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -x
+set -ex
 
 MOODLE_ROOT=/opt/bitnami/moodle
 
