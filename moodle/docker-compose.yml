@@ -18,9 +18,8 @@ services:
       - idems_moodlefs:/bitnami
     depends_on:
       - db
-    labels:
-      - 'traefik.http.routers.moodle.rule=Host(`moodle.localhost`)'
-    user: '1001'
+    ports:
+      - "8080:8080"
   db:
     image: postgres:15-alpine
     restart: unless-stopped
@@ -31,14 +30,6 @@ services:
   maxima:
     image: mathinstitut/goemaxima:2024060300-latest
     restart: always
-  rproxy:
-    image: traefik:v2.10
-    command: --api.insecure=true --providers.docker
-    ports:
-      - '80:80'
-      - '8080:8080'
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
   mail:
     image: axllent/mailpit:v1.6.21
     restart: unless-stopped
