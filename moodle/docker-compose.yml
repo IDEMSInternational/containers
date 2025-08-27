@@ -21,17 +21,17 @@ services:
     ports:
       - "8080:8080"
   db:
-    image: postgres:15-alpine
+    image: postgres:17-alpine
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: pgpassword
     volumes:
       - idems_moodledb:/var/lib/postgresql/data
   maxima:
-    image: mathinstitut/goemaxima:2024060300-latest
+    image: mathinstitut/goemaxima:2025073100-latest
     restart: always
   mail:
-    image: axllent/mailpit:v1.6.21
+    image: axllent/mailpit:v1.27
     restart: unless-stopped
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: 'yes'

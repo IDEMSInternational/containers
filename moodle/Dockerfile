@@ -1,4 +1,4 @@
-ARG MOODLE_VERSION=4.4.4
+ARG MOODLE_VERSION=4.5.4
 FROM docker.io/bitnami/moodle:$MOODLE_VERSION AS stager
 RUN install_packages curl git
 COPY plugins.* /staging/
