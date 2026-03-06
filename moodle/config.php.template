@@ -1,0 +1,75 @@
+<?php
+unset($CFG);  // Ignore this line
+global $CFG;  // This is necessary here for PHPUnit execution
+$CFG = new stdClass();
+
+//=========================================================================
+// 1. DATABASE SETUP
+//=========================================================================
+// First, you need to configure the database where all Moodle data       //
+// will be stored.  This database must already have been created         //
+// and a username/password created to access it.                         //
+
+$CFG->dbtype    = '${MOODLE_DB_TYPE}';  // 'pgsql', 'mariadb', 'mysqli', 'auroramysql', 'sqlsrv' or 'oci'
+$CFG->dblibrary = 'native';             // 'native' only at the moment
+$CFG->dbhost    = '${MOODLE_DB_HOST}';
+$CFG->dbname    = '${MOODLE_DB_NAME}';
+$CFG->dbuser    = '${MOODLE_DB_USER}';
+$CFG->dbpass    = '${MOODLE_DB_PASS}';
+$CFG->prefix    = 'mdl_';               // prefix to use for all table names
+$CFG->dboptions = array(
+    'dbpersist' => false,
+    'dbsocket'  => false,
+    'dbport'    => '',
+    'dbhandlesoptions' => false,
+);
+
+// For all database config settings see https://docs.moodle.org/en/Database_settings
+
+// Full web address e.g. 'https://moodle.example.com'. Do not include a trailing slash.
+$CFG->wwwroot   = '${MOODLE_WWW_ROOT}';
+
+
+//=========================================================================
+// 3. DATA FILES LOCATION
+//=========================================================================
+// Now you need a place where Moodle can save uploaded files.  This
+// directory should be readable AND WRITEABLE by the web server user
+// (usually 'nobody' or 'apache'), but it should not be accessible
+// directly via the web.
+//
+// - On hosting systems you might need to make sure that your "group" has
+//   no permissions at all, but that "others" have full permissions.
+//
+// - On Windows systems you might specify something like 'c:\moodledata'
+
+$CFG->dataroot  = '/var/www/moodledata';
+
+// Whether the Moodle router is fully configured.
+//
+// From Moodle 4.5 this is set to false.
+// The default value will change in a future release.
+//
+// When not configured on the web server it must be accessed via https://example.com/moodle/r.php
+// When configured the on the web server the 'r.php' may be removed.
+$CFG->routerconfigured = false;
+
+//=========================================================================
+// 4. DATA FILES PERMISSIONS
+//=========================================================================
+// The following parameter sets the permissions of new directories
+// created by Moodle within the data directory.  The format is in
+// octal format (as used by the Unix utility chmod, for example).
+// The default is usually OK, but you may want to change it to 0750
+// if you are concerned about world-access to the files (you will need
+// to make sure the web server process (eg Apache) can access the files.
+// NOTE: the prefixed 0 is important, and don't use quotes.
+
+$CFG->directorypermissions = 02777;
+
+$CFG->reverseproxy = ${MOODLE_REVERSE_PROXY};
+
+require_once(__DIR__ . '/lib/setup.php'); // Do not edit
+
+// There is no php closing tag in this file,
+// it is intentional because it prevents trailing whitespace problems!
