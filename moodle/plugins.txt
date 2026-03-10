@@ -1,10 +1,10 @@
-https://github.com/maths/moodle-qbehaviour_adaptivemultipart/archive/refs/tags/v4.3.8.tar.gz moodle-qbehaviour_adaptivemultipart-4.3.8.tar.gz 4ba1561919dff84a334398274658be987ca0227e3cf08c2d92f391358306f300 question/behaviour/adaptivemultipart
-https://github.com/maths/moodle-qbehaviour_dfcbmexplicitvaildate/archive/refs/tags/v4.2.2.tar.gz moodle-qbehaviour_dfcbmexplicitvaildate-4.2.2.tar.gz 9e946ed8cc944d00d80c4a9d2e1752632d3760c1c9ad612b9316377a6cba3fd0 question/behaviour/dfcbmexplicitvaildate
-https://github.com/maths/moodle-qbehaviour_dfexplicitvaildate/archive/refs/tags/v4.2.2.tar.gz moodle-qbehaviour_dfexplicitvaildate-4.2.2.tar.gz 2a1d88751dc013b6953c7ab421764156fcc3f83684f433bb049dc0cc5359c4bc question/behaviour/dfexplicitvaildate
-https://github.com/maths/moodle-qtype_stack/archive/refs/tags/v4.10.0.tar.gz moodle-qtype_stack-4.10.0.tar.gz eeefc309bcd4e5cda54fce16a91f76aec7d14dcd4f6e679724b945b22a865e70 question/type/stack
-https://github.com/maths/enrol_lticoursetemplate/archive/refs/heads/Update-to-use-LTI-Advantage.tar.gz enrol_lticoursetemplate-Update-to-use-LTI-Advantage.tar.gz 5142e6754d6510f92d2b4ec810c4e42e1acebfe1affe93db28642147ab37b013 enrol/lticoursetemplate
-https://github.com/mebis-lp/moodle-qtype_geogebra/archive/refs/tags/v1.13.4.tar.gz moodle-qtype_geogebra-1.13.4.tar.gz 64cde841fa4ea87093eca25e9d58abe8b6f2311a2f46e7e50afb16555aa85644 question/type/geogebra
-https://github.com/moodleou/moodle-qtype_pmatch/archive/refs/tags/v3.2.tar.gz moodle-qtype_pmatch-3.2.tar.gz 8d402c7371c35a600e488c483c1accabe546802c3f66863923bb4d0dd89358dd question/type/pmatch
-https://github.com/moodleou/moodle-report_editdates/archive/refs/tags/v3.0.tar.gz moodle-report_editdates-3.0.tar.gz f5e3d9282c680d47fdcea2d7dad09babea4eee9be69d3db49711a3a46587791a report/editdates
-https://github.com/trampgeek/moodle-qtype_coderunner/archive/refs/tags/v5.7.2+.tar.gz moodle-qtype_coderunner-5.7.2-.tar.gz 1d261ad84fdcbd764e4215ea1dbdc60aa86a32a5cc048765a35510f919e42695 question/type/coderunner
-https://github.com/trampgeek/moodle-qbehaviour_adaptive_adapted_for_coderunner/archive/refs/tags/v1.4.4.tar.gz moodle-qbehaviour_adaptive_adapted_for_coderunner-1.4.4.tar.gz fb38491210d73db951ece134f47b5473a98f7ac11a3340cb64d3057abfeb431f question/behaviour/adaptive_adapted_for_coderunner
+https://github.com/maths/moodle-qbehaviour_adaptivemultipart/archive/refs/tags/v4.3.8.tar.gz 4ba1561919dff84a334398274658be987ca0227e3cf08c2d92f391358306f300 question/behaviour/adaptivemultipart
+https://github.com/maths/moodle-qbehaviour_dfcbmexplicitvaildate/archive/refs/tags/v4.2.2.tar.gz 9e946ed8cc944d00d80c4a9d2e1752632d3760c1c9ad612b9316377a6cba3fd0 question/behaviour/dfcbmexplicitvaildate
+https://github.com/maths/moodle-qbehaviour_dfexplicitvaildate/archive/refs/tags/v4.2.2.tar.gz 2a1d88751dc013b6953c7ab421764156fcc3f83684f433bb049dc0cc5359c4bc question/behaviour/dfexplicitvaildate
+https://github.com/maths/moodle-qtype_stack/archive/refs/tags/v4.11.1.tar.gz d14d4ea1249744a831bcb3148bff441e149f1cd7ca73404b279e93304076f893 question/type/stack
+https://github.com/maths/enrol_lticoursetemplate/archive/refs/tags/v1.4.tar.gz 6845198c7bc818076d59215ab6f503b189b1263d3c0fc0c0bc384398462f722d enrol/lticoursetemplate
+https://github.com/mebis-lp/moodle-qtype_geogebra/archive/refs/tags/v1.13.4.tar.gz 64cde841fa4ea87093eca25e9d58abe8b6f2311a2f46e7e50afb16555aa85644 question/type/geogebra
+https://github.com/moodleou/moodle-qtype_pmatch/archive/refs/tags/v3.4.tar.gz 8fd9ad590faffb410b41478877de3a66dfe9687fb2c80b09017ede63093534d7 question/type/pmatch
+https://github.com/moodleou/moodle-report_editdates/archive/96fc7e855ad3ca7b06526fafe3ee742aff8acdaa.tar.gz b6ec22b8160e7bf980cae43e58726549180a3048a45cb21cde44879108fa70b8 report/editdates
+https://github.com/trampgeek/moodle-qtype_coderunner/archive/refs/tags/v5.8.0.tar.gz c789f76798c6ce5c866bf77bb5e05e9fd6c901ae7570541165abfa6c08c9f0cb question/type/coderunner
+https://github.com/trampgeek/moodle-qbehaviour_adaptive_adapted_for_coderunner/archive/refs/tags/v1.4.4.tar.gz fb38491210d73db951ece134f47b5473a98f7ac11a3340cb64d3057abfeb431f question/behaviour/adaptive_adapted_for_coderunner
