@@ -6,10 +6,13 @@ services:
     restart: always
     volumes:
       - ./default.conf.template:/etc/nginx/templates/default.conf.template
-      - moodle:/var/www/html:ro
+      - moodle_base:/var/www/html:ro
 
   moodle:
     build: .
+    depends_on:
+      db:
+        condition: service_healthy
     image: idems/moodle:latest
     environment:
       MAXIMA_URL: http://maxima:8080/maxima
@@ -32,18 +35,19 @@ services:
       MOODLE_SMTP_PASSWORD: moodle
       MOODLE_WWW_ROOT: http://localhost:8000
     volumes:
-      - moodledata:/var/www/moodledata
-      - moodle:/var/www/html
-      - ./entrypoint.sh:/opt/idems/entrypoint.sh
-    depends_on:
-      - db
+      - moodle_data:/var/www/moodledata
+      - moodle_base:/var/www/html
   db:
     image: postgres:17-alpine
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: pgpassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
     volumes:
-      - idems_moodledb:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
   maxima:
     image: mathinstitut/goemaxima:2025073100-latest
     restart: always
@@ -56,9 +60,9 @@ services:
     ports:
       - '8025:8025'
 volumes:
-  idems_moodledb:
+  db:
     driver: local
-  moodle:
+  moodle_base:
     driver: local
-  moodledata:
+  moodle_data:
     driver: local

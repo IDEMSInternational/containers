@@ -41,8 +41,7 @@ COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
 COPY --from=builder /opt/idems/moodle.tar.gz /opt/idems/moodle.tar.gz
 COPY config.php.* entrypoint.sh /opt/idems/
 COPY idems-php-fpm.ini /usr/local/etc/php/conf.d/
+RUN mkdir -p /var/www/html /var/www/moodledata
 RUN chmod 755 /opt/idems/entrypoint.sh
 ENTRYPOINT ["/opt/idems/entrypoint.sh"]
-RUN mkdir -p /var/www/html /var/www/moodledata \
-    && chown -R www-data:www-data /var/www/html /var/www/moodledata
 CMD ["php-fpm"]
