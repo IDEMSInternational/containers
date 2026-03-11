@@ -35,8 +35,18 @@ services:
       MOODLE_SMTP_PASSWORD: moodle
       MOODLE_WWW_ROOT: http://localhost:8000
     volumes:
-      - moodle_data:/var/www/moodledata
       - moodle_base:/var/www/html
+      - moodle_data:/var/www/moodledata
+  cron:
+    command: []
+    depends_on:
+      db:
+        condition: service_healthy
+    entrypoint: ["/opt/idems/cron.sh"]
+    image: idems/moodle:latest
+    volumes:
+      - moodle_base:/var/www/html
+      - moodle_data:/var/www/moodledata
   db:
     image: postgres:17-alpine
     restart: unless-stopped

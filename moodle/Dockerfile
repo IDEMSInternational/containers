@@ -15,6 +15,7 @@ RUN apt-get install -y --no-install-recommends \
 RUN docker-php-ext-install -j$(nproc) \
       gd \
       intl \
+      pcntl \
       pgsql \
       pdo_pgsql \
       soap \
@@ -39,7 +40,7 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
 COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
 COPY --from=builder /opt/idems/moodle.tar.gz /opt/idems/moodle.tar.gz
-COPY config.php.* entrypoint.sh /opt/idems/
+COPY config.php.* cron.sh entrypoint.sh /opt/idems/
 COPY idems-php-fpm.ini /usr/local/etc/php/conf.d/
 RUN mkdir -p /var/www/html /var/www/moodledata
 RUN chmod 755 /opt/idems/entrypoint.sh
