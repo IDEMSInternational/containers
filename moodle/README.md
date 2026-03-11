@@ -14,25 +14,34 @@ Start all services.
 docker compose up -d
 ```
 
-In a web browser, navigate to <http://moodle.localhost/>.
-
-# Scale up
-
-Scale up the number of Moodle instances to 2.
-```
-docker compose up -d --scale moodle=2
-```
-
-# Run scheduled tasks
-
-Every 60 seconds using the `watch` command.
-```
-watch -n 60 docker compose run --rm moodle php /bitnami/moodle/admin/cli/cron.php
-```
+In a web browser, navigate to <http://localhost:8000/>.
 
 # View outgoing emails
 
 [Mailpit] has been set up to catch all outgoing emails from Moodle. View sent emails via the web UI at <http://localhost:8025/>.
 
+# Upgrading
+
+Make sure all services are stopped.
+```
+docker compose down
+```
+
+Remove the 'moodle_base' volume.
+```
+docker volume rm moodle_moodle_base
+```
+
+Start the 'moodle' service.
+```
+docker compose up -d moodle
+```
+
+Complete any post-upgrade setup. In a web browser, navigate to <http://localhost:8000/admin/>.
+
+Start up the remaining services.
+```
+docker compose up -d
+```
 
 [Mailpit]: https://github.com/axllent/mailpit
