@@ -41,7 +41,7 @@ COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
 COPY --from=builder /opt/idems/moodle.tar.gz /opt/idems/moodle.tar.gz
 COPY config.php.* cron.sh entrypoint.sh /opt/idems/
-COPY idems-php-fpm.ini /usr/local/etc/php/conf.d/
+COPY idems-php.ini /usr/local/etc/php/conf.d/
 RUN mkdir -p /var/www/html /var/www/moodledata
 RUN chmod 755 /opt/idems/entrypoint.sh
 ENTRYPOINT ["/opt/idems/entrypoint.sh"]
