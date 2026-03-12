@@ -1,19 +1,23 @@
 server {
-    listen 80;
-    server_name localhost;
-    root /var/www/html;
-    index index.php;
+    listen               443 ssl;
+    server_name          ${DOMAIN};
+    ssl_certificate      /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+    ssl_certificate_key  /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
+    root                 /var/www/html;
+    index                index.php;
+    add_header           Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    client_max_body_size 128m;
 
     location ~ \.php(/|$) {
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
-        set $path_info $fastcgi_path_info;
-        try_files $fastcgi_script_name $fastcgi_script_name/;
-        fastcgi_buffers 256 4k;
-        fastcgi_pass moodle:9000;
-        fastcgi_index index.php;
-        include fastcgi_params;
-        fastcgi_param DOCUMENT_ROOT $realpath_root;
-        fastcgi_param PATH_INFO $path_info;
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        set                     $path_info $fastcgi_path_info;
+        try_files               $fastcgi_script_name $fastcgi_script_name/;
+        fastcgi_buffers         256 4k;
+        fastcgi_pass            moodle:9000;
+        fastcgi_index           index.php;
+        include                 fastcgi_params;
+        fastcgi_param           DOCUMENT_ROOT $realpath_root;
+        fastcgi_param           PATH_INFO $path_info;
+        fastcgi_param           SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     }
 }

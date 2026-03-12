@@ -14,7 +14,7 @@ Start all services.
 docker compose up -d
 ```
 
-In a web browser, navigate to <http://localhost:8000/>.
+In a web browser, navigate to <http://localhost/>. Any security complaints from the browser can safely be ignored or excepted.
 
 # View outgoing emails
 
@@ -37,7 +37,7 @@ Start the 'moodle' service.
 docker compose up -d moodle
 ```
 
-Complete any post-upgrade setup. In a web browser, navigate to <http://localhost:8000/admin/>.
+Complete any post-upgrade setup. In a web browser, navigate to <https://localhost/admin/>.
 
 Start up the remaining services.
 ```
