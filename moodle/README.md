@@ -14,7 +14,7 @@ Start all services.
 docker compose up -d
 ```
 
-In a web browser, navigate to <http://localhost/>. Any security complaints from the browser can safely be ignored or excepted.
+In a web browser, navigate to <https://localhost/>. Any security complaints from the browser can safely be ignored or excepted.
 
 # View outgoing emails
 

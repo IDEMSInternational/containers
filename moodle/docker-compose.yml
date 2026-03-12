@@ -57,7 +57,7 @@ services:
       - moodle_data:/var/www/moodledata
 
   db:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: pgpassword
@@ -70,7 +70,7 @@ services:
 
   maxima:
     image: mathinstitut/goemaxima:2026010500-latest
-    restart: always
+    restart: unless-stopped
 
   mail:
     image: axllent/mailpit:v1.27
