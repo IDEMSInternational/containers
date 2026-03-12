@@ -44,6 +44,7 @@ services:
     volumes:
       - moodle_base:/var/www/html
       - moodle_data:/var/www/moodledata
+
   cron:
     command: []
     depends_on:
@@ -54,6 +55,7 @@ services:
     volumes:
       - moodle_base:/var/www/html
       - moodle_data:/var/www/moodledata
+
   db:
     image: postgres:17-alpine
     restart: unless-stopped
@@ -65,9 +67,11 @@ services:
       timeout: 5s
     volumes:
       - db:/var/lib/postgresql/data
+
   maxima:
-    image: mathinstitut/goemaxima:2025073100-latest
+    image: mathinstitut/goemaxima:2026010500-latest
     restart: always
+
   mail:
     image: axllent/mailpit:v1.27
     restart: unless-stopped
@@ -76,6 +80,7 @@ services:
       MP_SMTP_AUTH_ALLOW_INSECURE: 'yes'
     ports:
       - '8025:8025'
+
 volumes:
   db:
     driver: local

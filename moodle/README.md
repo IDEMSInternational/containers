@@ -20,6 +20,16 @@ In a web browser, navigate to <http://localhost/>. Any security complaints from 
 
 [Mailpit] has been set up to catch all outgoing emails from Moodle. View sent emails via the web UI at <http://localhost:8025/>.
 
+# Configuring STACK
+
+Some manual configuration is required to set up the Computer Algebra System (CAS) connection from STACK to Goemaxima. Visit the STACK settings page: <https://localhost/admin/settings.php?section=qtypesettingstack>.
+
+Set the following:
+
+- Platform type: Server
+- Maxima version: 5.44.0
+- URL of the Maxima Pool: http://maxima:8080/maxima
+
 # Upgrading
 
 Make sure all services are stopped.
@@ -44,4 +54,6 @@ Start up the remaining services.
 docker compose up -d
 ```
 
+
 [Mailpit]: https://github.com/axllent/mailpit
+[STACK settings page]: https://localhost/admin/settings.php?section=qtypesettingstack
