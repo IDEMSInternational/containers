@@ -1,5 +1,7 @@
 services:
   proxy:
+    depends_on:
+      - moodle
     environment:
       CERTBOT_EMAIL: ops@idems.international
       DOMAIN: localhost
@@ -22,7 +24,6 @@ services:
         condition: service_healthy
     image: idems/moodle:latest
     environment:
-      MAXIMA_URL: http://maxima:8080/maxima
       MOODLE_ADMIN_USER: admin
       MOODLE_ADMIN_PASS: pa55word
       MOODLE_ADMIN_EMAIL: admin@example.com
