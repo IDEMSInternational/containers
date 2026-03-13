@@ -7,18 +7,39 @@ The purpose of this project is to create a container image for Moodle that is ca
 - Docker
 - Docker Compose
 
-# Quick start
+# Installation
 
-Start all services.
+Start up the 'moodle' service.
+```
+docker compose up -d moodle
+```
+
+Check the logs for the message "Installation completed successfully".
+```
+docker compose logs -f moodle
+```
+
+Once installed, start up the remaining services.
 ```
 docker compose up -d
 ```
 
-In a web browser, navigate to <https://localhost/>. Any security complaints from the browser can safely be ignored or excepted.
+In a web browser, navigate to <https://localhost/admin/>. Any security complaints from the browser can safely be ignored or excepted. Complete any post-installation setup - it should be fine to simply click the "Save" button at the bottom of the page. At this point, the installation should be complete.
 
-# View outgoing emails
+# Email notifications
 
-[Mailpit] has been set up to catch all outgoing emails from Moodle. View sent emails via the web UI at <http://localhost:8025/>.
+Visit the outgoing mail configuration page: <https://localhost/admin/settings.php?section=outgoingmailconfig>.
+
+Configure:
+
+- SMTP hosts: mail:1025
+- SMTP username: moodle
+- SMTP password: moodle
+- No-reply address: no-reply@example.com
+
+Send a test email: <https://localhost/admin/testoutgoingmailconf.php>.
+
+[Mailpit] should catch all outgoing emails from Moodle. View sent emails via the web UI at <http://localhost:8025/>.
 
 # Configuring STACK
 
@@ -37,7 +58,7 @@ Make sure all services are stopped.
 docker compose down
 ```
 
-Remove the 'moodle_base' volume.
+Remove the 'moodle\_base' volume.
 ```
 docker volume rm moodle_moodle_base
 ```
