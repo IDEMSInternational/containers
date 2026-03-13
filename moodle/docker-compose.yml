@@ -63,7 +63,7 @@ services:
       interval: 10s
       timeout: 5s
     volumes:
-      - db:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/18/docker
 
   maxima:
     image: mathinstitut/goemaxima:2026010500-latest
