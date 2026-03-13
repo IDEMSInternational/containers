@@ -37,10 +37,6 @@ services:
       MOODLE_DB_NAME: postgres
       MOODLE_DB_PASS: pgpassword
       MOODLE_REVERSE_PROXY: "false"
-      MOODLE_SMTP_HOST: mail
-      MOODLE_SMTP_PORT: "1025"
-      MOODLE_SMTP_USER: moodle
-      MOODLE_SMTP_PASSWORD: moodle
       MOODLE_WWW_ROOT: https://localhost
     volumes:
       - moodle_base:/var/www/html
