@@ -75,6 +75,15 @@ Start up the remaining services.
 docker compose up -d
 ```
 
+# PHP configuration via environment variables
+
+A few PHP settings can be altered via environment variables of the 'moodle' service:
+
+- `PHP_MAX_INPUT_VARS`: limits the number of values that can be submitted from input forms; for Moodle, a value greater than or equal to 5000 is recommended; default "5000"
+- `PHP_POST_MAX_SIZE`: limits the number of bytes that can be received in a single POST request; default "8M"
+- `PHP_UPLOAD_MAX_FILESIZE` limits the file size that can be uploaded in a single request; default "8M"
+
 
 [Mailpit]: https://github.com/axllent/mailpit
 [STACK settings page]: https://localhost/admin/settings.php?section=qtypesettingstack
+[max_input_vars]: https://www.php.net/manual/en/info.configuration.php#ini.max-input-vars
