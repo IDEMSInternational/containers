@@ -1,0 +1,33 @@
+<?php
+unset($CFG);  // Ignore this line
+global $CFG;  // This is necessary here for PHPUnit execution
+$CFG = new stdClass();
+
+// Only 'dbtype' currently supported is 'pgsql'
+$CFG->dbtype    = '${MOODLE_DB_TYPE}';
+$CFG->dblibrary = 'native';
+$CFG->dbhost    = '${MOODLE_DB_HOST}';
+$CFG->dbname    = '${MOODLE_DB_NAME}';
+$CFG->dbuser    = '${MOODLE_DB_USER}';
+$CFG->dbpass    = '${MOODLE_DB_PASS}';
+// prefix to use for all table names
+$CFG->prefix    = 'mdl_';
+$CFG->dboptions = array(
+    'dbpersist' => false,
+    'dbsocket'  => false,
+    'dbport'    => '',
+    'dbhandlesoptions' => false,
+);
+// For all database config settings see https://docs.moodle.org/en/Database_settings
+
+// Full web address e.g. 'https://moodle.example.com'. Do not include a trailing slash.
+$CFG->wwwroot   = '${MOODLE_WWW_ROOT}';
+$CFG->dataroot  = '/var/www/moodledata';
+$CFG->routerconfigured = false;
+$CFG->directorypermissions = 02777;
+$CFG->reverseproxy = ${MOODLE_REVERSE_PROXY};
+
+require_once(__DIR__ . '/lib/setup.php'); // Do not edit
+
+// There is no php closing tag in this file,
+// it is intentional because it prevents trailing whitespace problems!

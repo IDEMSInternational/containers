@@ -1,35 +1,74 @@
 services:
+  proxy:
+    depends_on:
+      - moodle
+    environment:
+      CERTBOT_EMAIL: ops@idems.international
+      DOMAIN: localhost
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx/user_conf.d
+      USE_LOCAL_CA: "1"
+    image: jonasal/nginx-certbot:6.1.0-nginx1.29.5
+    ports:
+      - "80:80/tcp"
+      - "443:443/tcp"
+    restart: unless-stopped
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+      - moodle_base:/var/www/html:ro
+      - ./default.conf.template:/etc/nginx/templates/default.conf.template
+
   moodle:
     build: .
+    depends_on:
+      db:
+        condition: service_healthy
     image: idems/moodle:latest
     environment:
-      MAXIMA_URL: http://maxima:8080/maxima
-      MOODLE_DATABASE_TYPE: pgsql
-      MOODLE_DATABASE_HOST: db
-      MOODLE_DATABASE_PORT_NUMBER: '5432'
-      MOODLE_DATABASE_USER: postgres
-      MOODLE_DATABASE_NAME: postgres
-      MOODLE_DATABASE_PASSWORD: pgpassword
-      MOODLE_SMTP_HOST: mail
-      MOODLE_SMTP_PORT: '1025'
-      MOODLE_SMTP_USER: moodle
-      MOODLE_SMTP_PASSWORD: moodle
+      MOODLE_ADMIN_USER: admin
+      MOODLE_ADMIN_PASS: pa55word
+      MOODLE_ADMIN_EMAIL: admin@example.com
+      MOODLE_FULL_NAME: Example Moodle site
+      MOODLE_SHORT_NAME: example
+      MOODLE_SUPPORT_EMAIL: support@example.com
+      MOODLE_DB_TYPE: pgsql
+      MOODLE_DB_HOST: db
+      MOODLE_DB_PORT_NUMBER: "5432"
+      MOODLE_DB_USER: postgres
+      MOODLE_DB_NAME: postgres
+      MOODLE_DB_PASS: pgpassword
+      MOODLE_REVERSE_PROXY: "false"
+      MOODLE_WWW_ROOT: https://localhost
     volumes:
-      - idems_moodlefs:/bitnami
+      - moodle_base:/var/www/html
+      - moodle_data:/var/www/moodledata
+
+  cron:
+    command: []
     depends_on:
-      - db
-    ports:
-      - "8080:8080"
+      db:
+        condition: service_healthy
+    entrypoint: ["/opt/idems/cron.sh"]
+    image: idems/moodle:latest
+    volumes:
+      - moodle_base:/var/www/html
+      - moodle_data:/var/www/moodledata
+
   db:
-    image: postgres:17-alpine
+    image: postgres:18-alpine
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: pgpassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
     volumes:
-      - idems_moodledb:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/18/docker
+
   maxima:
-    image: mathinstitut/goemaxima:2025073100-latest
-    restart: always
+    image: mathinstitut/goemaxima:2026010500-latest
+    restart: unless-stopped
+
   mail:
     image: axllent/mailpit:v1.27
     restart: unless-stopped
@@ -38,8 +77,13 @@ services:
       MP_SMTP_AUTH_ALLOW_INSECURE: 'yes'
     ports:
       - '8025:8025'
+
 volumes:
-  idems_moodledb:
+  db:
     driver: local
-  idems_moodlefs:
+  letsencrypt:
+    driver: local
+  moodle_base:
+    driver: local
+  moodle_data:
     driver: local
