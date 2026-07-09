@@ -15,7 +15,7 @@ $CFG->prefix    = 'mdl_';
 $CFG->dboptions = array(
     'dbpersist' => false,
     'dbsocket'  => false,
-    'dbport'    => '',
+    'dbport'    => '${MOODLE_DB_PORT}',
     'dbhandlesoptions' => false,
 );
 // For all database config settings see https://docs.moodle.org/en/Database_settings
@@ -26,6 +26,7 @@ $CFG->dataroot  = '/var/www/moodledata';
 $CFG->routerconfigured = false;
 $CFG->directorypermissions = 02777;
 $CFG->reverseproxy = ${MOODLE_REVERSE_PROXY};
+$CFG->sslproxy = ${MOODLE_SSL_PROXY};
 
 require_once(__DIR__ . '/lib/setup.php'); // Do not edit
 
