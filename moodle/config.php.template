@@ -28,6 +28,12 @@ $CFG->directorypermissions = 02777;
 $CFG->reverseproxy = ${MOODLE_REVERSE_PROXY};
 $CFG->sslproxy = ${MOODLE_SSL_PROXY};
 
+# TODO Make this optional, if Redis/Valkey is not available
+$CFG->session_handler_class = '\core\session\redis';
+$CFG->session_redis_host = '${MOODLE_REDIS_HOST}';
+$CFG->session_redis_port = ${MOODLE_REDIS_PORT};
+$CFG->session_redis_database = ${MOODLE_REDIS_DB};
+
 require_once(__DIR__ . '/lib/setup.php'); // Do not edit
 
 // There is no php closing tag in this file,

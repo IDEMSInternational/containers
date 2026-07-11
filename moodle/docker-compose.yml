@@ -36,6 +36,9 @@ services:
       MOODLE_DB_USER: postgres
       MOODLE_DB_NAME: postgres
       MOODLE_DB_PASS: pgpassword
+      MOODLE_REDIS_DB: 1
+      MOODLE_REDIS_HOST: valkey
+      MOODLE_REDIS_PORT: 6379
       MOODLE_REVERSE_PROXY: "false"
       MOODLE_WWW_ROOT: https://localhost
     volumes:

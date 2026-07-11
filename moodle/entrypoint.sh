@@ -2,13 +2,6 @@
 
 set -eu
 
-if [[ ! $(ls -A /var/www/html) ]]
-then
-    tar -C /var/www/html -xf /opt/idems/moodle.tar.gz
-    chown -R www-data:www-data /var/www
-    echo "Moodle source files installed"
-fi
-
 cat /opt/idems/config.php.template | envsubst "$(sed -e 's/^/$/' /opt/idems/config.php.vars)" > /var/www/html/config.php
 echo "Configuration file (config.php) created"
 

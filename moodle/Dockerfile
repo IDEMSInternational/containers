@@ -1,5 +1,5 @@
 FROM php:8.3-fpm-bookworm AS builder
-ARG MOODLE_VERSION=4.5.10
+ARG MOODLE_VERSION=4.5.11
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
       curl \
@@ -20,10 +20,13 @@ RUN docker-php-ext-install -j$(nproc) \
       pdo_pgsql \
       soap \
       zip
-RUN git clone --depth 1 --branch v${MOODLE_VERSION} https://github.com/moodle/moodle.git /opt/idems/moodle
+RUN pecl channel-update pecl.php.net
+RUN pecl install redis
+RUN docker-php-ext-enable redis.so
+RUN git clone --depth 1 --branch v${MOODLE_VERSION} https://github.com/moodle/moodle.git /opt/idems/moodle \
+    && rm -rf /opt/idems/moodle/.git
 COPY plugins.* /staging/
 RUN /staging/plugins.sh
-RUN tar -C /opt/idems/moodle -czf /opt/idems/moodle.tar.gz .
 
 FROM php:8.3-fpm-bookworm
 RUN apt-get update && apt-get install --yes --no-install-recommends \
@@ -39,10 +42,11 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
-COPY --from=builder /opt/idems/moodle.tar.gz /opt/idems/moodle.tar.gz
+COPY --from=builder /opt/idems/moodle /var/www/html
 COPY config.php.* cron.sh entrypoint.sh /opt/idems/
 COPY idems-php.ini /usr/local/etc/php/conf.d/
-RUN mkdir -p /var/www/html /var/www/moodledata
+RUN mkdir -p /var/www/moodledata
 RUN chmod 755 /opt/idems/entrypoint.sh
+RUN chown -R www-data:www-data /var/www
 ENTRYPOINT ["/opt/idems/entrypoint.sh"]
 CMD ["php-fpm"]
