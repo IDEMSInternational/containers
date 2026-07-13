@@ -1,5 +1,5 @@
 FROM php:8.3-fpm-bookworm AS builder
-ARG MOODLE_VERSION=4.5.11
+ARG MOODLE_VERSION=4.5.12
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends \
       curl \
@@ -27,6 +27,7 @@ RUN git clone --depth 1 --branch v${MOODLE_VERSION} https://github.com/moodle/mo
     && rm -rf /opt/idems/moodle/.git
 COPY plugins.* /staging/
 RUN /staging/plugins.sh
+COPY config.php /opt/idems/moodle/config.php
 
 FROM php:8.3-fpm-bookworm
 RUN apt-get update && apt-get install --yes --no-install-recommends \
@@ -43,7 +44,7 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
 COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
 COPY --from=builder /opt/idems/moodle /var/www/html
-COPY config.php.* cron.sh entrypoint.sh /opt/idems/
+COPY cron.sh entrypoint.sh /opt/idems/
 COPY idems-php.ini /usr/local/etc/php/conf.d/
 RUN mkdir -p /var/www/moodledata
 RUN chmod 755 /opt/idems/entrypoint.sh
