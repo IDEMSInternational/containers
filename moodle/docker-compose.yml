@@ -34,7 +34,6 @@ services:
       MOODLE_SUPPORT_EMAIL: support@example.com
       MOODLE_DB_TYPE: pgsql
       MOODLE_DB_HOST: db
-      MOODLE_DB_PORT_NUMBER: "5432"
       MOODLE_DB_USER: postgres
       MOODLE_DB_NAME: postgres
       MOODLE_DB_PASS: pgpassword
