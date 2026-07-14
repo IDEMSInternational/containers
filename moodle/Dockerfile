@@ -10,9 +10,11 @@ RUN apt-get install -y --no-install-recommends \
       libpng-dev \
       libpq-dev \
       libxml2-dev \
+      libyaml-dev \
       libzip-dev \
       zlib1g-dev
 RUN docker-php-ext-install -j$(nproc) \
+      exif \
       gd \
       intl \
       pcntl \
@@ -21,8 +23,8 @@ RUN docker-php-ext-install -j$(nproc) \
       soap \
       zip
 RUN pecl channel-update pecl.php.net
-RUN pecl install redis
-RUN docker-php-ext-enable redis.so
+RUN yes '' | pecl install redis yaml
+RUN docker-php-ext-enable redis.so yaml.so
 RUN git clone --depth 1 --branch v${MOODLE_VERSION} https://github.com/moodle/moodle.git /opt/idems/moodle \
     && rm -rf /opt/idems/moodle/.git
 COPY plugins.* /staging/
@@ -38,6 +40,7 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
       libpng16-16 \
       libpq5 \
       libxml2 \
+      libyaml-0-2 \
       libzip4 \
       zlib1g \
     && rm -rf /var/lib/apt/lists/*
