@@ -39,18 +39,16 @@ RUN apt-get update && apt-get install --yes --no-install-recommends \
       libjpeg62-turbo \
       libpng16-16 \
       libpq5 \
-      libxml2 \
       libyaml-0-2 \
       libzip4 \
       zlib1g \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
-COPY --from=builder /opt/idems/moodle /var/www/html
+COPY --from=builder --chown=www-data:www-data /opt/idems/moodle /var/www/html
 COPY cron.sh entrypoint.sh /opt/idems/
 COPY idems-php.ini /usr/local/etc/php/conf.d/
-RUN mkdir -p /var/www/moodledata
-RUN chmod 755 /opt/idems/entrypoint.sh
-RUN chown -R www-data:www-data /var/www
+RUN mkdir -p /var/www/moodledata \
+    && chown www-data:www-data /var/www/moodledata
 ENTRYPOINT ["/opt/idems/entrypoint.sh"]
 CMD ["php-fpm"]
