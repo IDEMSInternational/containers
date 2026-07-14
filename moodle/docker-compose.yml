@@ -22,8 +22,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      valkey:
+        condition: service_healthy
     image: idems/moodle:latest
-    environment:
+    environment: &moodle_env
       MOODLE_ADMIN_USER: admin
       MOODLE_ADMIN_PASS: pa55word
       MOODLE_ADMIN_EMAIL: admin@example.com
@@ -39,7 +41,7 @@ services:
       MOODLE_REDIS_DB: 1
       MOODLE_REDIS_HOST: valkey
       MOODLE_REDIS_PORT: 6379
-      MOODLE_REVERSE_PROXY: "false"
+      MOODLE_SESSION_HANDLER: redis
       MOODLE_WWW_ROOT: https://localhost
     volumes:
       - moodle_base:/var/www/html
@@ -50,10 +52,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      valkey:
+        condition: service_healthy
     entrypoint: ["/opt/idems/cron.sh"]
+    environment:
+      <<: *moodle_env
     image: idems/moodle:latest
     volumes:
-      - moodle_base:/var/www/html
       - moodle_data:/var/www/moodledata
 
   db:
@@ -67,6 +72,17 @@ services:
       timeout: 5s
     volumes:
       - db:/var/lib/postgresql/18/docker
+
+  valkey:
+    command: valkey-server --save 60 1 --loglevel warning
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      timeout: 2s
+    image: valkey/valkey:9.1.0-alpine3.23
+    restart: unless-stopped
+    volumes:
+      - valkey:/data
 
   maxima:
     image: mathinstitut/goemaxima:2026010500-latest
@@ -89,4 +105,6 @@ volumes:
   moodle_base:
     driver: local
   moodle_data:
+    driver: local
+  valkey:
     driver: local
