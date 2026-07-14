@@ -6,5 +6,5 @@ https://github.com/maths/enrol_lticoursetemplate/archive/refs/tags/v1.4.tar.gz 6
 https://github.com/mebis-lp/moodle-qtype_geogebra/archive/refs/tags/v1.13.4.tar.gz 64cde841fa4ea87093eca25e9d58abe8b6f2311a2f46e7e50afb16555aa85644 question/type/geogebra
 https://github.com/moodleou/moodle-qtype_pmatch/archive/refs/tags/v3.4.tar.gz 8fd9ad590faffb410b41478877de3a66dfe9687fb2c80b09017ede63093534d7 question/type/pmatch
 https://github.com/moodleou/moodle-report_editdates/archive/96fc7e855ad3ca7b06526fafe3ee742aff8acdaa.tar.gz b6ec22b8160e7bf980cae43e58726549180a3048a45cb21cde44879108fa70b8 report/editdates
-https://github.com/trampgeek/moodle-qtype_coderunner/archive/refs/tags/v5.8.0.tar.gz c789f76798c6ce5c866bf77bb5e05e9fd6c901ae7570541165abfa6c08c9f0cb question/type/coderunner
-https://github.com/trampgeek/moodle-qbehaviour_adaptive_adapted_for_coderunner/archive/refs/tags/v1.4.4.tar.gz fb38491210d73db951ece134f47b5473a98f7ac11a3340cb64d3057abfeb431f question/behaviour/adaptive_adapted_for_coderunner
+https://github.com/trampgeek/moodle-qtype_coderunner/archive/refs/tags/v5.9.2.tar.gz 5078b1c945a4c4fc29dc18b9bc06109582d63cdc71c38b9a22393d36b57303af question/type/coderunner
+https://github.com/trampgeek/moodle-qbehaviour_adaptive_adapted_for_coderunner/archive/refs/tags/v1.4.5.tar.gz 0325c032a47aaadb2095a141c7aeb114ffe4849303b2f03c887a64c023fe80ba question/behaviour/adaptive_adapted_for_coderunner
