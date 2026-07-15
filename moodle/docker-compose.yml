@@ -84,7 +84,7 @@ services:
       - valkey:/data
 
   maxima:
-    image: mathinstitut/goemaxima:2026010500-latest
+    image: mathinstitut/goemaxima:2026062900-latest
     restart: unless-stopped
 
   mail:
